@@ -48,7 +48,7 @@ static const bool is_param_a_flag(const string name)
 const map<string, string> read_params(int argc, char** argv)
 {
 	map<string,string> params;
-	uint16_t i=1;
+	int i=1;
 	while(i<argc)
 	{
 		if (argv[i][0] == '-' && argv[i][1] == '-')
