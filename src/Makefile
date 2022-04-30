@@ -5,6 +5,9 @@ SOURCES=main.cpp params.cpp
 OBJECTS=$(SOURCES:%.cpp=%.o)
 EXECUTABLE=../mmm
 
+.PHONY: all
+.PHONY: clean
+
 all: $(EXECUTABLE)
 
 $(EXECUTABLE): $(OBJECTS)

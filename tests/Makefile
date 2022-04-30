@@ -5,6 +5,10 @@ SOURCES=main.cpp params_test.cpp ../src/params.cpp
 OBJECTS=$(SOURCES:%.cpp=%.o)
 EXECUTABLE=../run_ut
 
+.PHONY: all
+.PHONY: clean
+.PHONY: run
+
 all: $(EXECUTABLE)
 	$(EXECUTABLE)
 

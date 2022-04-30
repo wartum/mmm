@@ -1,11 +1,15 @@
+.PHONY: all
+.PHONY: compile
+.PHONY: test
+.PHONY: clean
 
 all: compile test
 
 compile:
-	make -C src
+	make all -C src
 
 test:
-	make -C tests
+	make all -C tests
 
 clean:
 	make $@ -C src
