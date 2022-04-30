@@ -1,7 +1,7 @@
 CC=g++
-CFLAGS=-Wall -Werror -std=c++11
+CFLAGS=-g -Wall -Werror -std=c++11
 LFLAGS=-ltag
-SOURCES=main.cpp params.cpp
+SOURCES=main.cpp params.cpp tags.cpp
 OBJECTS=$(SOURCES:%.cpp=%.o)
 EXECUTABLE=../mmm
 

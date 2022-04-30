@@ -2,10 +2,9 @@
 #include <stdexcept>
 #include <string>
 #include <map>
-#include <taglib/fileref.h>
-#include <taglib/tstring.h>
 
 #include "params.h"
+#include "tags.h"
 
 using std::string;
 
@@ -45,3 +44,4 @@ static int handle_params(int argc, char** argv)
 	}
 	return 0;
 }
+

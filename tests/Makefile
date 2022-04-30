@@ -1,7 +1,9 @@
 CC=g++
-CFLAGS=-Wall -Werror -std=c++11
+CFLAGS=-g -Wall -Werror -std=c++11
 LFLAGS=-ltag -lgtest -lgmock
-SOURCES=main.cpp params_test.cpp ../src/params.cpp
+SOURCES=main.cpp \
+	params_test.cpp ../src/params.cpp \
+	tags_test.cpp ../src/tags.cpp
 OBJECTS=$(SOURCES:%.cpp=%.o)
 EXECUTABLE=../run_ut
 
