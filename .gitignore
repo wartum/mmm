@@ -1,2 +1,5 @@
+.cache
 *.o
 mmm
+run_ut
+compile_commands.json

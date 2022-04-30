@@ -14,10 +14,11 @@ struct SupportedParameter
 
 const SupportedParameter supportedParameters[] 
 {
-	{ "file-path", "path to mp3 file", true, false },
-	{ "print-title", "prints mp3 title to STDOUT", false, true },
-	{ "print-author", "prints mp3 author to STDOUT", false, true },
-	{ "print-album", "prints mp3 album to STDOUT", false, true },
+	{ "file-path"    , "path to mp3 file"            , true  , false } ,
+	{ "print-title"  , "prints mp3 title to STDOUT"  , false , true  } ,
+	{ "print-author" , "prints mp3 author to STDOUT" , false , true  } ,
+	{ "print-album"  , "prints mp3 album to STDOUT"  , false , true  } ,
+	{ "help"         , "prints help message"         , false , true  } ,
 };
 
 static const bool is_param_supported(const string name)

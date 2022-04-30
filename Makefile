@@ -1,21 +1,13 @@
-CC=g++
-CFLAGS=-Wall -Werror -std=c++11
-LFLAGS=-ltag
-SOURCES=main.cpp params.cpp
-OBJECTS=$(SOURCES:%.cpp=%.o)
 EXECUTABLE=mmm
 
-all: $(EXECUTABLE)
+all: $(EXECUTABLE) test
 
-$(EXECUTABLE): $(OBJECTS)
-	$(CC) $(CFLAGS) $(LFLAGS) $^ -o $@
+$(EXECUTABLE):
+	make -C src
 
-run: $(EXECUTABLE)
-	./$(EXECUTABLE)
+test:
+	make -C tests
 
 clean:
-	rm $(EXECUTABLE) $(OBJECTS)
-
-%.o: %.cpp
-	$(CC) $(CFLAGS) -c $< -o $@
-
+	make $@ -C src
+	make $@ -C tests
