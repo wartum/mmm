@@ -1,8 +1,7 @@
-EXECUTABLE=mmm
 
-all: $(EXECUTABLE) test
+all: compile test
 
-$(EXECUTABLE):
+compile:
 	make -C src
 
 test:

@@ -14,6 +14,11 @@ int main(int argc, char** argv)
 	try
 	{
 		auto params = read_params(argc, argv);
+		if (params.find("help") != params.end())
+		{
+			print_usage();
+			return 0;
+		}
 		for (auto it=params.begin(); it != params.end(); it++)
 		{
 			std::cout << it->first << " : " << it->second << std::endl;
@@ -21,7 +26,7 @@ int main(int argc, char** argv)
 	}
 	catch (std::invalid_argument& e)
 	{
-		std::cerr << e.what() << std::endl << std::endl;
+		std::cerr << e.what() << std::endl << "use --help parameter for available parameters" << std::endl;
 		return -1;
 	}
 

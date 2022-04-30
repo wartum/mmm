@@ -18,7 +18,7 @@ const SupportedParameter supportedParameters[]
 	{ "print-title"  , "prints mp3 title to STDOUT"  , false , true  } ,
 	{ "print-author" , "prints mp3 author to STDOUT" , false , true  } ,
 	{ "print-album"  , "prints mp3 album to STDOUT"  , false , true  } ,
-	{ "help"         , "prints help message"         , false , true  } ,
+	{ "help"         , "prints this message"         , false , true  } ,
 };
 
 static const bool is_param_supported(const string name)
@@ -88,7 +88,7 @@ const map<string, string> read_params(int argc, char** argv)
 	}
 	for (auto& p : supportedParameters)
 	{
-		if (p.is_mandatory && params.find(p.name) == params.end())
+		if (p.is_mandatory && params.find(p.name) == params.end() && params.find("help") == params.end())
 		{
 			std::stringstream ss;
 			ss << "Mandatory field \"" << p.name << "\" is not provided";
@@ -105,15 +105,14 @@ void print_usage()
 	{
 		auto mandatory = p.is_mandatory ?
 			" [Mandatory]" :
-			"\t";
+			"";
 
 		std::cout
 			<< "--"
 			<< p.name 
 			<< mandatory
-			<< "\t- "
+			<< " - "
 			<< p.description
 			<< std::endl;
 	}
-	std::cout << std::endl << std::endl;
 }
