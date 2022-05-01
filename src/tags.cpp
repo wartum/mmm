@@ -20,3 +20,21 @@ const string get_tag(const string file_path, TagType tags)
 	}
 	return string();
 }
+
+const void set_tag(const string file_path, TagType tags, const string value)
+{
+	TagLib::FileRef file(file_path.c_str());
+	switch (tags)
+	{
+		case TagType::Title:
+			file.tag()->setTitle(value);
+			break;
+		case TagType::Author:
+			file.tag()->setArtist(value);
+			break;
+		case TagType::Album:
+			file.tag()->setAlbum(value);
+			break;
+	}
+	file.save();
+}

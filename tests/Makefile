@@ -1,6 +1,6 @@
 CC=g++
 CFLAGS=-g -Wall -Werror -std=c++11
-LFLAGS=-ltag -lgtest -lgmock
+LFLAGS=-ltag -lgtest
 SOURCES=main.cpp \
 	params_test.cpp ../src/params.cpp \
 	tags_test.cpp ../src/tags.cpp
