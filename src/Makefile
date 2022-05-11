@@ -7,6 +7,8 @@ EXECUTABLE=../mmm
 
 .PHONY: all
 .PHONY: clean
+.PHONY: install
+.PHONY: uninstall
 
 all: $(EXECUTABLE)
 
@@ -19,3 +21,8 @@ clean:
 %.o: %.cpp
 	$(CC) $(CFLAGS) -c $< -o $@
 
+install: $(EXECUTABLE)
+	cp $(EXECUTABLE) /usr/bin
+
+uninstall:
+	rm /usr/bin/mmm

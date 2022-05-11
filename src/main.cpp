@@ -9,18 +9,11 @@
 using std::string;
 
 static map<string, string> params;
+static vector<string> files;
 
 static int handle_params(int argc, char** argv);
-static void print_tags(const string file_path,
-		const bool print_title,
-		const bool print_author,
-		const bool print_album
-		);
-static void modify_tags(const string file_path,
-		const string new_title,
-		const string new_author,
-		const string new_album
-		);
+static void print_tags(const string file_path, const bool print_title, const bool print_author, const bool print_album);
+static void modify_tags(const string file_path, const string new_title, const string new_author, const string new_album);
 
 int main(int argc, char** argv)
 {
@@ -33,14 +26,17 @@ int main(int argc, char** argv)
 		return 0;
 	}
 
-	modify_tags(params["file-path"],
+	for (auto& file : files)
+	{
+		modify_tags(file,
 			params.find("set-title")  != params.end() ? params["set-title"]  : string(),
 			params.find("set-author") != params.end() ? params["set-author"] : string(),
 			params.find("set-album")  != params.end() ? params["set-album"]  : string());
-	print_tags(params["file-path"],
+		print_tags(file,
 			params.find("print-title")  != params.end(),
 			params.find("print-author") != params.end(),
 			params.find("print-album")  != params.end());
+}
 
 	return 0;
 }
@@ -49,8 +45,9 @@ static int handle_params(int argc, char** argv)
 {
 	try
 	{
-		auto p = read_params(argc, argv);
-		params = std::move(p);
+		auto ret = read_args(argc, argv);
+		params = std::move(std::get<0>(ret));
+		files = std::move(std::get<1>(ret));
 	}
 	catch (std::invalid_argument& e)
 	{
@@ -65,9 +62,9 @@ static int handle_params(int argc, char** argv)
 
 static void print_tags(const string file_path, const bool print_title, const bool print_author, const bool print_album)
 {
-	if(print_title) std::cout  << "Title: "  << get_tag(file_path, TagType::Title)  << std::endl;
-	if(print_author) std::cout << "Author: " << get_tag(file_path, TagType::Author) << std::endl;
-	if(print_album) std::cout  << "Album: "  << get_tag(file_path, TagType::Album)  << std::endl;
+	if(print_title) std::cout  << file_path << ": " << "Title: "  << get_tag(file_path, TagType::Title)  << std::endl;
+	if(print_author) std::cout << file_path << ": " << "Author: " << get_tag(file_path, TagType::Author) << std::endl;
+	if(print_album) std::cout  << file_path << ": " << "Album: "  << get_tag(file_path, TagType::Album)  << std::endl;
 }
 
 static void modify_tags(const string file_path, const string new_title, const string new_author, const string new_album)

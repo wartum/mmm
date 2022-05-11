@@ -2,6 +2,8 @@
 .PHONY: compile
 .PHONY: test
 .PHONY: clean
+.PHONY: install
+.PHONY: uninstall
 
 all: compile test
 
@@ -14,3 +16,9 @@ test:
 clean:
 	make $@ -C src
 	make $@ -C tests
+
+install:
+	make install -C src
+
+uninstall:
+	make uninstall -C src

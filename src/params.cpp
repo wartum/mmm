@@ -2,6 +2,8 @@
 #include <string.h>
 #include <stdexcept>
 #include <sstream>
+#include <tuple>
+#include <unistd.h>
 #include "params.h"
 
 struct SupportedParameter
@@ -48,9 +50,10 @@ static const bool is_param_a_flag(const string name)
 	return false;
 }
 
-const map<string, string> read_params(int argc, char** argv)
+const tuple<map<string, string>, vector<string>> read_args(int argc, char** argv)
 {
 	map<string,string> params;
+	vector<string> files;
 	int i=1;
 	while(i<argc)
 	{
@@ -84,21 +87,20 @@ const map<string, string> read_params(int argc, char** argv)
 		}
 		else
 		{
-			std::stringstream ss;
-			ss << "Invalid argument \"" << argv[i] << "\"";
-			throw std::invalid_argument(ss.str());
+			if (access(argv[i], F_OK) == 0)
+			{
+				files.push_back(string(argv[i]));
+				i += 1;
+			}
+			else
+			{
+				std::stringstream ss;
+				ss << "File " << argv[i] << " doesn't exist";
+				throw std::invalid_argument(ss.str());
+			}
 		}
 	}
-	for (auto& p : supportedParameters)
-	{
-		if (p.is_mandatory && params.find(p.name) == params.end() && params.find("help") == params.end())
-		{
-			std::stringstream ss;
-			ss << "Mandatory field \"" << p.name << "\" is not provided";
-			throw std::invalid_argument(ss.str());
-		}
-	}
-	return params;
+	return std::make_tuple(params, files);
 }
 
 void print_usage()
