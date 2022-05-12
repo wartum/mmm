@@ -29,7 +29,7 @@ protected:
 
 	void SetUp() override
 	{
-		for (auto& file_name : {"tests/music.mp3", "tests/music2.mp3"})
+		for (auto& file_name : {"music.mp3", "music2.mp3"})
 		{
 			std::ofstream f(file_name, std::ios::out);
 			f << "";
@@ -39,7 +39,7 @@ protected:
 
 	void TearDown() override
 	{
-		for (auto& file_name : {"tests/music.mp3", "tests/music2.mp3"})
+		for (auto& file_name : {"music.mp3", "music2.mp3"})
 		{
 			remove(file_name);
 		}
