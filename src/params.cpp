@@ -16,14 +16,15 @@ struct SupportedParameter
 
 const SupportedParameter supportedParameters[] 
 {
-	{ "help"         , "Prints this message"             , false , true  } ,
-	{ "file-path"    , "Path to mp3 file"                , true  , false } ,
-	{ "print-title"  , "Prints mp3 title to STDOUT"      , false , true  } ,
-	{ "print-author" , "Prints mp3 author to STDOUT"     , false , true  } ,
-	{ "print-album"  , "Prints mp3 album to STDOUT"      , false , true  } ,
-	{ "set-title"    , "Sets file title to given value"  , false , false } ,
-	{ "set-author"   , "Sets file author to given value" , false , false } ,
-	{ "set-album"    , "Sets file album to given value"  , false , false } ,
+	{ "help"         ,"Prints this message"                            ,false ,true  },
+	{ "file-path"    ,"Path to mp3 file"                               ,true  ,false },
+	{ "print-title"  ,"Prints mp3 title to STDOUT"                     ,false ,true  },
+	{ "print-author" ,"Prints mp3 author to STDOUT"                    ,false ,true  },
+	{ "print-album"  ,"Prints mp3 album to STDOUT"                     ,false ,true  },
+	{ "set-title"    ,"Sets file title to given value"                 ,false ,false },
+	{ "set-author"   ,"Sets file author to given value"                ,false ,false },
+	{ "set-album"    ,"Sets file album to given value"                 ,false ,false },
+	{ "groups"       ,"Applies regex on file name and matches groups"  ,false ,false },
 };
 
 static const bool is_param_supported(const string name)

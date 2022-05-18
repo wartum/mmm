@@ -1,5 +1,6 @@
 #include <iostream>
 #include <stdexcept>
+#include <regex>
 #include <string>
 #include <map>
 
@@ -12,6 +13,7 @@ static map<string, string> params;
 static vector<string> files;
 
 static int handle_params(int argc, char** argv);
+static vector<string> get_groups(string file, string pattern);
 static void print_tags(const string file_path, const bool print_title, const bool print_author, const bool print_album);
 static void modify_tags(const string file_path, const string new_title, const string new_author, const string new_album);
 
@@ -28,6 +30,7 @@ int main(int argc, char** argv)
 
 	for (auto& file : files)
 	{
+		auto groups = get_groups(file, params["groups"]);
 		modify_tags(file,
 			params.find("set-title")  != params.end() ? params["set-title"]  : string(),
 			params.find("set-author") != params.end() ? params["set-author"] : string(),
@@ -36,7 +39,7 @@ int main(int argc, char** argv)
 			params.find("print-title")  != params.end(),
 			params.find("print-author") != params.end(),
 			params.find("print-album")  != params.end());
-}
+	}
 
 	return 0;
 }
@@ -72,4 +75,20 @@ static void modify_tags(const string file_path, const string new_title, const st
 	if (new_title.empty() == false)  set_tag(file_path, TagType::Title, new_title);
 	if (new_author.empty() == false) set_tag(file_path, TagType::Author, new_author);
 	if (new_album.empty() == false)  set_tag(file_path, TagType::Album, new_album);
+}
+
+static vector<string> get_groups(string file, string pattern)
+{
+	vector<string> groups;
+	std::smatch m;
+	std::regex regex(pattern);
+
+	if (std::regex_search(file, m, regex))
+	{
+		for (auto it = m.begin() + 1; it != m.end(); it++)
+		{
+			groups.push_back(*it);
+		}
+	}
+	return groups;
 }
