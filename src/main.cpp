@@ -16,6 +16,7 @@ static int handle_params(int argc, char** argv);
 static vector<string> get_groups(string file, string pattern);
 static void print_tags(const string file_path, const bool print_title, const bool print_author, const bool print_album);
 static void modify_tags(const string file_path, const string new_title, const string new_author, const string new_album);
+static const string get_from_group(const string original, vector<string> groups);
 
 int main(int argc, char** argv)
 {
@@ -32,9 +33,9 @@ int main(int argc, char** argv)
 	{
 		auto groups = get_groups(file, params["groups"]);
 		modify_tags(file,
-			params.find("set-title")  != params.end() ? params["set-title"]  : string(),
-			params.find("set-author") != params.end() ? params["set-author"] : string(),
-			params.find("set-album")  != params.end() ? params["set-album"]  : string());
+			params.find("set-title")  != params.end() ? get_from_group(params["set-title"], groups)  : string(),
+			params.find("set-author") != params.end() ? get_from_group(params["set-author"], groups) : string(),
+			params.find("set-album")  != params.end() ? get_from_group(params["set-album"], groups)  : string());
 		print_tags(file,
 			params.find("print-title")  != params.end(),
 			params.find("print-author") != params.end(),
@@ -82,6 +83,8 @@ static vector<string> get_groups(string file, string pattern)
 	vector<string> groups;
 	std::smatch m;
 	std::regex regex(pattern);
+	auto pos = file.find_last_of("/");
+	file = file.substr(pos + 1);
 
 	if (std::regex_search(file, m, regex))
 	{
@@ -91,4 +94,15 @@ static vector<string> get_groups(string file, string pattern)
 		}
 	}
 	return groups;
+}
+
+static const string get_from_group( string original, vector<string> groups)
+{
+	std::smatch m;
+	std::regex regex("^\\(\\d\\)$");
+	if (std::regex_search(original, m, regex))
+	{
+		return groups[std::stoi(string(&m[0].str()[1]))-1];
+	}
+	return original;
 }
