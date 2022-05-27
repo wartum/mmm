@@ -1,7 +1,9 @@
 .cache
 *.o
+pch.h.gch
 mmm
 run_ut
+*.mp3
 compile_commands.json
 .vimspector.json
 .vscode

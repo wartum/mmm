@@ -9,11 +9,11 @@
 class TagsTest : public ::testing::Test
 {
 protected:
-	const string original_file = "my_sample.mp3";
+	const string original_file = "mine_sample.mp3";
 	const string file = "sample.mp3";
-	const string original_title = "Sample title";
-	const string original_author = "Sample author";
-	const string original_album = "Sample album";
+	const string original_title = "";
+	const string original_author = "";
+	const string original_album = "";
 	const string new_title = "New title";
 	const string new_author = "New author";
 	const string new_album = "New album";
