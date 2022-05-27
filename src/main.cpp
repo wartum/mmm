@@ -4,6 +4,8 @@
 #include "tags.h"
 
 using std::string;
+using std::vector;
+using std::map;
 
 static map<string, string> params;
 static vector<string> files;

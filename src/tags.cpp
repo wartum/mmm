@@ -3,6 +3,8 @@
 
 #include "tags.h"
 
+using std::string;
+
 const string get_tag(const string file_path, TagType tags)
 {
 	TagLib::FileRef file(file_path.c_str());

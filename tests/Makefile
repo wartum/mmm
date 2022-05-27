@@ -22,7 +22,7 @@ $(SAMPLE_MP3):
 	ffmpeg -f alsa -i hw:0,0 -t 1 $(SAMPLE_MP3)
 
 clean:
-	rm -f $(EXECUTABLE) $(OBJECTS) $(SAMPLE_MP3)
+	rm -f $(EXECUTABLE) $(OBJECTS)
 
 %.o: %.cpp
 	$(CC) $(CFLAGS) -c $< -o $@

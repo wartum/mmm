@@ -1,6 +1,9 @@
 #include "pch.h"
 #include "groups.h"
 
+using std::vector;
+using std::string;
+
 vector<string> get_groups(string file, string pattern)
 {
 	vector<string> groups;

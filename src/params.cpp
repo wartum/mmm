@@ -5,6 +5,11 @@
 
 #include "params.h"
 
+using std::string;
+using std::vector;
+using std::tuple;
+using std::map;
+
 struct SupportedParameter
 {
 	string name;

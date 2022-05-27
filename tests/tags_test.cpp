@@ -6,6 +6,8 @@
 #include <cstdio>
 #include "../src/tags.h"
 
+using std::string;
+
 class TagsTest : public ::testing::Test
 {
 protected:

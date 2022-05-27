@@ -45,7 +45,7 @@ protected:
 		}
 	}
 
-	void setup_testing_args(std::vector<string> args)
+	void setup_testing_args(std::vector<std::string> args)
 	{
 		argv[0] = new char[4];
 		strcpy(argv[0], "mmm");

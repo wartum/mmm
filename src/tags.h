@@ -1,8 +1,6 @@
 #pragma once
 #include "pch.h"
 
-using std::string;
-
 enum TagType
 {
 	Title,
@@ -10,5 +8,5 @@ enum TagType
 	Album,
 };
 
-const string get_tag(const string file_path, TagType tags);
-const void set_tag(const string file_path, TagType tags, const string value);
+const std::string get_tag(const std::string file_path, TagType tags);
+const void set_tag(const std::string file_path, TagType tags, const std::string value);

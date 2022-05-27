@@ -1,8 +1,5 @@
 #pragma once
 #include "pch.h"
 
-using std::vector;
-using std::string;
-
-vector<string> get_groups(string file, string pattern);
-const string get_from_group(const string original, vector<string> groups);
+std::vector<std::string> get_groups(std::string file, std::string pattern);
+const std::string get_from_group(const std::string original, std::vector<std::string> groups);
