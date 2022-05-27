@@ -106,7 +106,7 @@ const tuple<map<string, string>, vector<string>> read_args(int argc, char** argv
 
 void print_usage()
 {
-	std::cout << "Mp3 Metadata Modifier usage\n";
+	std::cout << "MP3 Metadata Modifier usage\n";
 	for (auto& p : supportedParameters)
 	{
 		auto mandatory = p.is_mandatory ?
