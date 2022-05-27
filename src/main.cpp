@@ -1,10 +1,6 @@
-#include <iostream>
-#include <stdexcept>
-#include <regex>
-#include <string>
-#include <map>
-
+#include "pch.h"
 #include "params.h"
+#include "groups.h"
 #include "tags.h"
 
 using std::string;
@@ -13,10 +9,8 @@ static map<string, string> params;
 static vector<string> files;
 
 static int handle_params(int argc, char** argv);
-static vector<string> get_groups(string file, string pattern);
 static void print_tags(const string file_path, const bool print_title, const bool print_author, const bool print_album);
 static void modify_tags(const string file_path, const string new_title, const string new_author, const string new_album);
-static const string get_from_group(const string original, vector<string> groups);
 
 int main(int argc, char** argv)
 {
@@ -76,33 +70,4 @@ static void modify_tags(const string file_path, const string new_title, const st
 	if (new_title.empty() == false)  set_tag(file_path, TagType::Title, new_title);
 	if (new_author.empty() == false) set_tag(file_path, TagType::Author, new_author);
 	if (new_album.empty() == false)  set_tag(file_path, TagType::Album, new_album);
-}
-
-static vector<string> get_groups(string file, string pattern)
-{
-	vector<string> groups;
-	std::smatch m;
-	std::regex regex(pattern);
-	auto pos = file.find_last_of("/");
-	file = file.substr(pos + 1);
-
-	if (std::regex_search(file, m, regex))
-	{
-		for (auto it = m.begin() + 1; it != m.end(); it++)
-		{
-			groups.push_back(*it);
-		}
-	}
-	return groups;
-}
-
-static const string get_from_group( string original, vector<string> groups)
-{
-	std::smatch m;
-	std::regex regex("^\\(\\d\\)$");
-	if (std::regex_search(original, m, regex))
-	{
-		return groups[std::stoi(string(&m[0].str()[1]))-1];
-	}
-	return original;
 }
