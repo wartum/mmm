@@ -22,13 +22,26 @@ vector<string> get_groups(string file, string pattern)
 	return groups;
 }
 
-const string get_from_group( string original, vector<string> groups)
+const string get_from_group(const string original, vector<string> groups)
 {
+	std::string input = original;
 	std::smatch m;
-	std::regex regex("^\\(\\d\\)$");
-	if (std::regex_search(original, m, regex))
+	std::regex regex("\\(\\d+\\)");
+	while (std::regex_search(input, m, regex))
 	{
-		return groups[std::stoi(string(&m[0].str()[1]))-1];
+		auto pos = input.find(m[0]);
+		auto len = m[0].length();
+		auto num_str = m[0].str().substr(1, len - 2);
+		auto num_int = std::stoi(num_str);
+		
+		if (groups.size() >= (long unsigned int)num_int)
+		{
+			input.replace(pos, len, groups[num_int - 1]);
+		}
+		else
+		{
+			input.replace(pos, len, "");
+		}
 	}
-	return original;
+	return input;
 }
